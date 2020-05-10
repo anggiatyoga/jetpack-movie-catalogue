@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.DetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <ImageView
+            android:id="@+id/img_backdrop_detail"
+            android:layout_height="245dp"
+            android:layout_width="wrap_content"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:contentDescription="@string/image_backdrop" />
+
+        <ImageView
+            android:id="@+id/img_gradient_black"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/bg_gradient_black"
+            app:layout_constraintBottom_toBottomOf="@+id/img_backdrop_detail"
+            app:layout_constraintEnd_toEndOf="@+id/img_backdrop_detail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_backdrop_detail"
+            android:contentDescription="@string/image_view_gradient" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_play_detail"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play_arrow_black"
+            app:layout_constraintBottom_toBottomOf="@+id/img_gradient_black"
+            app:layout_constraintEnd_toEndOf="@+id/img_gradient_black"
+            app:layout_constraintStart_toStartOf="@+id/img_gradient_black"
+            app:layout_constraintTop_toTopOf="@+id/img_gradient_black"
+            android:focusable="true" />
+
+        <ImageView
+            android:id="@+id/img_poster_detail"
+            android:layout_width="120dp"
+            android:layout_height="181dp"
+            android:layout_marginStart="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/include_detail_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fab_play_detail"
+            android:contentDescription="@string/img_poster_detail" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_rounded"
+            app:layout_constraintBottom_toBottomOf="@+id/img_backdrop_detail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_backdrop_detail"
+            android:contentDescription="@string/ic_rounded" />
+
+        <TextView
+            android:id="@+id/tv_vote_average_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/vote_average"
+            android:textColor="@android:color/white"
+            android:textSize="10pt"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <include
+            android:id="@+id/include_detail_description"
+            layout="@layout/content_detail_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_poster_detail"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
+        <TextView
+            android:id="@+id/text_overview_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/text_overview"
+            android:textColor="@color/colorText"
+            android:textSize="10pt"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_detail_description" />
+
+        <TextView
+            android:id="@+id/tv_overview_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="8dp"
+            android:text="@string/overview_movie"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/text_overview_detail"
+            app:layout_constraintStart_toStartOf="@+id/text_overview_detail"
+            app:layout_constraintTop_toBottomOf="@+id/text_overview_detail" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

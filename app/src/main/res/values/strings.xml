@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">JetpackMovieCatalogue</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="text_title_label">Title Movie</string>
+    <string name="text_runtime_label">Runtime</string>
+    <string name="text_language_label">Language</string>
+    <string name="vote_average">9.0</string>
+    <string name="tv_show">Tv Show</string>
+    <string name="movie">Movies</string>
+    <string name="text_language_label_detail">Language :</string>
+    <string name="overview_movie">Overview</string>
+    <string name="img_poster_detail">img_poster_detail</string>
+    <string name="ic_rounded">ic_rounded</string>
+    <string name="text_overview">Overview</string>
+    <string name="text_title">Title</string>
+    <string name="text_animation">Animation</string>
+    <string name="text_actions">Actions</string>
+    <string name="text_release_time_label_detail">Release time :</string>
+    <string name="txt_release_date">Nov 22, 2017</string>
+    <string name="text_runtime_label_detail">Runtime :</string>
+    <string name="text_runtime_detail">1h 28min</string>
+    <string name="text_language_detail">English</string>
+    <string name="text_first_air_date_label">First air date :</string>
+    <string name="text_season_label">Season :</string>
+    <string name="txt_season_detail">2</string>
+    <string name="text_episode_label">Episode :</string>
+    <string name="txt_episode_detail">12</string>
+    <string name="image_backdrop">image_backdrop</string>
+    <string name="image_view_gradient">image_view_gradient</string>
+</resources>
