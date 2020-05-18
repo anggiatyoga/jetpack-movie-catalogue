@@ -1,37 +1,34 @@
-package com.anggiat.jetpackmoviecatalogue.data;
+package com.anggiat.jetpackmoviecatalogue.data.source.remote.response;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class MovieEntity implements Parcelable {
+public class TvShowResponse implements Parcelable {
     private String id;
     private String posterPath;
-    private String title;
+    private String name;
     private String genreOne;
     private String genreTwo;
-    private String runtime;
-    private String spokenLanguages;
+    private String numberOfSeasons;
+    private String numberOfEpisodes;
     private String voteAverage;
     private String overview;
     private String backdropPath;
-    private String releaseDate;
+    private String firstAirDate;
     private String keyTrailer;
 
-    public MovieEntity() {
-    }
-
-    public MovieEntity(String id, String posterPath, String title, String genreOne, String genreTwo, String runtime, String spokenLanguages, String voteAverage, String overview, String backdropPath, String release_date, String keyTrailer) {
+    public TvShowResponse(String id, String posterPath, String name, String genreOne, String genreTwo, String numberOfSeasons, String numberOfEpisodes, String voteAverage, String overview, String backdropPath, String firstAirDate, String keyTrailer) {
         this.id = id;
         this.posterPath = posterPath;
-        this.title = title;
+        this.name = name;
         this.genreOne = genreOne;
         this.genreTwo = genreTwo;
-        this.runtime = runtime;
-        this.spokenLanguages = spokenLanguages;
+        this.numberOfSeasons = numberOfSeasons;
+        this.numberOfEpisodes = numberOfEpisodes;
         this.voteAverage = voteAverage;
         this.overview = overview;
         this.backdropPath = backdropPath;
-        this.releaseDate = release_date;
+        this.firstAirDate = firstAirDate;
         this.keyTrailer = keyTrailer;
     }
 
@@ -51,12 +48,12 @@ public class MovieEntity implements Parcelable {
         this.posterPath = posterPath;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getGenreOne() {
@@ -75,20 +72,20 @@ public class MovieEntity implements Parcelable {
         this.genreTwo = genreTwo;
     }
 
-    public String getRuntime() {
-        return runtime;
+    public String getNumberOfSeasons() {
+        return numberOfSeasons;
     }
 
-    public void setRuntime(String runtime) {
-        this.runtime = runtime;
+    public void setNumberOfSeasons(String numberOfSeasons) {
+        this.numberOfSeasons = numberOfSeasons;
     }
 
-    public String getSpokenLanguages() {
-        return spokenLanguages;
+    public String getNumberOfEpisodes() {
+        return numberOfEpisodes;
     }
 
-    public void setSpokenLanguages(String spokenLanguages) {
-        this.spokenLanguages = spokenLanguages;
+    public void setNumberOfEpisodes(String numberOfEpisodes) {
+        this.numberOfEpisodes = numberOfEpisodes;
     }
 
     public String getVoteAverage() {
@@ -115,12 +112,12 @@ public class MovieEntity implements Parcelable {
         this.backdropPath = backdropPath;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getFirstAirDate() {
+        return firstAirDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setFirstAirDate(String firstAirDate) {
+        this.firstAirDate = firstAirDate;
     }
 
     public String getKeyTrailer() {
@@ -131,6 +128,7 @@ public class MovieEntity implements Parcelable {
         this.keyTrailer = keyTrailer;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -140,44 +138,42 @@ public class MovieEntity implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
         dest.writeString(this.posterPath);
-        dest.writeString(this.title);
+        dest.writeString(this.name);
         dest.writeString(this.genreOne);
         dest.writeString(this.genreTwo);
-        dest.writeString(this.runtime);
-        dest.writeString(this.spokenLanguages);
+        dest.writeString(this.numberOfSeasons);
+        dest.writeString(this.numberOfEpisodes);
         dest.writeString(this.voteAverage);
         dest.writeString(this.overview);
         dest.writeString(this.backdropPath);
-        dest.writeString(this.releaseDate);
+        dest.writeString(this.firstAirDate);
         dest.writeString(this.keyTrailer);
     }
 
-    protected MovieEntity(Parcel in) {
+    protected TvShowResponse(Parcel in) {
         this.id = in.readString();
         this.posterPath = in.readString();
-        this.title = in.readString();
+        this.name = in.readString();
         this.genreOne = in.readString();
         this.genreTwo = in.readString();
-        this.runtime = in.readString();
-        this.spokenLanguages = in.readString();
+        this.numberOfSeasons = in.readString();
+        this.numberOfEpisodes = in.readString();
         this.voteAverage = in.readString();
         this.overview = in.readString();
         this.backdropPath = in.readString();
-        this.releaseDate = in.readString();
+        this.firstAirDate = in.readString();
         this.keyTrailer = in.readString();
     }
 
-    public static final Parcelable.Creator<MovieEntity> CREATOR = new Parcelable.Creator<MovieEntity>() {
+    public static final Parcelable.Creator<TvShowResponse> CREATOR = new Parcelable.Creator<TvShowResponse>() {
         @Override
-        public MovieEntity createFromParcel(Parcel source) {
-            return new MovieEntity(source);
+        public TvShowResponse createFromParcel(Parcel source) {
+            return new TvShowResponse(source);
         }
 
         @Override
-        public MovieEntity[] newArray(int size) {
-            return new MovieEntity[size];
+        public TvShowResponse[] newArray(int size) {
+            return new TvShowResponse[size];
         }
     };
-
-
 }

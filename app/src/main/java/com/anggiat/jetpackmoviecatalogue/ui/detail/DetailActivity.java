@@ -7,13 +7,16 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.anggiat.jetpackmoviecatalogue.BuildConfig;
 import com.anggiat.jetpackmoviecatalogue.R;
-import com.anggiat.jetpackmoviecatalogue.data.MovieEntity;
-import com.anggiat.jetpackmoviecatalogue.data.TvShowEntity;
+import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.MovieEntity;
+import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.TvShowEntity;
+import com.anggiat.jetpackmoviecatalogue.utils.viewmodel.ViewModelFactory;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -38,6 +41,7 @@ public class DetailActivity extends AppCompatActivity {
     private FloatingActionButton fabPlayButton;
     private TextView textLabelRuntime;
     private TextView textLabelLanguage;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +61,34 @@ public class DetailActivity extends AppCompatActivity {
         fabPlayButton = findViewById(R.id.fab_play_detail);
         textLabelRuntime = findViewById(R.id.text_runtime_detail);
         textLabelLanguage = findViewById(R.id.text_language_detail);
+        progressBar = findViewById(R.id.progress_bar);
 
-        DetailViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(DetailViewModel.class);
+        ViewModelFactory factory = ViewModelFactory.getInstance(this);
+        DetailViewModel viewModel = new ViewModelProvider(this, factory).get(DetailViewModel.class);
 
         MovieEntity movies = getIntent().getParcelableExtra(EXTRA_MOVIE);
         TvShowEntity tvShow = getIntent().getParcelableExtra(EXTRA_TV_SHOW);
 
+        progressBar.setVisibility(View.VISIBLE);
         if (movies != null && tvShow == null) {
             viewModel.setSelectedMovie(movies.getId());
-            initViewMovies(viewModel.getMovie());
-            playTrailer(viewModel.getMovie().getKeyTrailer());
+            viewModel.getMovie().observe(this, movieEntity -> {
+                if (movieEntity != null) {
+                    progressBar.setVisibility(View.GONE);
+                    initViewMovies(movieEntity);
+                    playTrailer(movieEntity.getKeyTrailer());
+                }
+            });
         } else if (tvShow != null && movies == null) {
             viewModel.setSelectedTvShow(tvShow.getId());
-            initViewTvShow(viewModel.getTvShow());
-            playTrailer(viewModel.getTvShow().getKeyTrailer());
+            viewModel.getTvShow().observe(this, tvShowEntity -> {
+                if (tvShowEntity != null) {
+                    progressBar.setVisibility(View.GONE);
+                    initViewTvShow(tvShowEntity);
+                    playTrailer(tvShowEntity.getKeyTrailer());
+                }
+            });
+
         } else {
             System.out.println("Data not found");
         }

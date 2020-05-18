@@ -1,14 +1,26 @@
 package com.anggiat.jetpackmoviecatalogue.ui.detail;
 
-import com.anggiat.jetpackmoviecatalogue.data.MovieEntity;
-import com.anggiat.jetpackmoviecatalogue.data.TvShowEntity;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
+import com.anggiat.jetpackmoviecatalogue.data.source.MovieRepository;
+import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.MovieEntity;
+import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.TvShowEntity;
 import com.anggiat.jetpackmoviecatalogue.utils.DataDummy;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DetailViewModelTest {
     private DetailViewModel detailViewModel;
     private MovieEntity dummyMovie = DataDummy.generateDataMovies().get(0);
@@ -16,10 +28,21 @@ public class DetailViewModelTest {
     private String movieId = dummyMovie.getId();
     private String tvShowId = dummyTvShow.getId();
 
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutor = new InstantTaskExecutorRule();
+
+    @Mock
+    private MovieRepository movieRepository;
+
+    @Mock
+    private Observer<MovieEntity> movieObserver;
+
+    @Mock
+    private Observer<TvShowEntity> tvShowObserver;
 
     @Before
     public void setUp() {
-        detailViewModel = new DetailViewModel();
+        detailViewModel = new DetailViewModel(movieRepository);
         detailViewModel.setSelectedMovie(movieId);
         detailViewModel.setSelectedTvShow(tvShowId);
     }
@@ -27,9 +50,11 @@ public class DetailViewModelTest {
 
     @Test
     public void getMovie() {
-        detailViewModel.setSelectedMovie(dummyMovie.getId());
-        MovieEntity movieEntity = detailViewModel.getMovie();
-
+        MutableLiveData<MovieEntity> movie = new MutableLiveData<>();
+        movie.setValue(dummyMovie);
+        when(movieRepository.getMoviesById(movieId)).thenReturn(movie);
+        MovieEntity movieEntity = detailViewModel.getMovie().getValue();
+        verify(movieRepository).getMoviesById(movieId);
         assertNotNull(movieEntity);
         assertEquals(dummyMovie.getId(), movieEntity.getId());
         assertEquals(dummyMovie.getPosterPath(), movieEntity.getPosterPath());
@@ -43,13 +68,19 @@ public class DetailViewModelTest {
         assertEquals(dummyMovie.getBackdropPath(), movieEntity.getBackdropPath());
         assertEquals(dummyMovie.getReleaseDate(), movieEntity.getReleaseDate());
         assertEquals(dummyMovie.getKeyTrailer(), movieEntity.getKeyTrailer());
+
+        detailViewModel.getMovie().observeForever(movieObserver);
+        verify(movieObserver).onChanged(dummyMovie);
     }
 
     @Test
     public void getTvShow() {
-        detailViewModel.setSelectedTvShow(dummyTvShow.getId());
-        TvShowEntity tvShowEntity = detailViewModel.getTvShow();
-
+        MutableLiveData<TvShowEntity> tvShow = new MutableLiveData<>();
+        tvShow.setValue(dummyTvShow);
+        when(movieRepository.getTvShowById(tvShowId)).thenReturn(tvShow);
+        TvShowEntity tvShowEntity = detailViewModel.getTvShow().getValue();
+        verify(movieRepository).getTvShowById(tvShowId);
+        assertNotNull(tvShowEntity);
         assertEquals(dummyTvShow.getId(), tvShowEntity.getId());
         assertEquals(dummyTvShow.getPosterPath(), tvShowEntity.getPosterPath());
         assertEquals(dummyTvShow.getName(), tvShowEntity.getName());
@@ -62,5 +93,8 @@ public class DetailViewModelTest {
         assertEquals(dummyTvShow.getBackdropPath(), tvShowEntity.getBackdropPath());
         assertEquals(dummyTvShow.getFirstAirDate(), tvShowEntity.getFirstAirDate());
         assertEquals(dummyTvShow.getKeyTrailer(), tvShowEntity.getKeyTrailer());
+
+        detailViewModel.getTvShow().observeForever(tvShowObserver);
+        verify(tvShowObserver).onChanged(dummyTvShow);
     }
 }

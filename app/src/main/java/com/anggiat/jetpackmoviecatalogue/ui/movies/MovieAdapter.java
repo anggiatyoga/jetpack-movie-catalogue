@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.anggiat.jetpackmoviecatalogue.BuildConfig;
 import com.anggiat.jetpackmoviecatalogue.R;
-import com.anggiat.jetpackmoviecatalogue.data.MovieEntity;
+import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.MovieEntity;
 import com.anggiat.jetpackmoviecatalogue.ui.detail.DetailActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;

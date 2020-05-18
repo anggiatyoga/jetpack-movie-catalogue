@@ -1,37 +1,37 @@
-package com.anggiat.jetpackmoviecatalogue.data;
+package com.anggiat.jetpackmoviecatalogue.data.source.local.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class TvShowEntity implements Parcelable {
+public class MovieEntity implements Parcelable {
     private String id;
     private String posterPath;
-    private String name;
+    private String title;
     private String genreOne;
     private String genreTwo;
-    private String numberOfSeasons;
-    private String numberOfEpisodes;
+    private String runtime;
+    private String spokenLanguages;
     private String voteAverage;
     private String overview;
     private String backdropPath;
-    private String firstAirDate;
+    private String releaseDate;
     private String keyTrailer;
 
-    public TvShowEntity() {
+    public MovieEntity() {
     }
 
-    public TvShowEntity(String id, String posterPath, String name, String genreOne, String genreTwo, String numberOfSeasons, String numberOfEpisodes, String voteAverage, String overview, String backdropPath, String firstAirDate, String keyTrailer) {
+    public MovieEntity(String id, String posterPath, String title, String genreOne, String genreTwo, String runtime, String spokenLanguages, String voteAverage, String overview, String backdropPath, String release_date, String keyTrailer) {
         this.id = id;
         this.posterPath = posterPath;
-        this.name = name;
+        this.title = title;
         this.genreOne = genreOne;
         this.genreTwo = genreTwo;
-        this.numberOfSeasons = numberOfSeasons;
-        this.numberOfEpisodes = numberOfEpisodes;
+        this.runtime = runtime;
+        this.spokenLanguages = spokenLanguages;
         this.voteAverage = voteAverage;
         this.overview = overview;
         this.backdropPath = backdropPath;
-        this.firstAirDate = firstAirDate;
+        this.releaseDate = release_date;
         this.keyTrailer = keyTrailer;
     }
 
@@ -51,12 +51,12 @@ public class TvShowEntity implements Parcelable {
         this.posterPath = posterPath;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getGenreOne() {
@@ -75,20 +75,20 @@ public class TvShowEntity implements Parcelable {
         this.genreTwo = genreTwo;
     }
 
-    public String getNumberOfSeasons() {
-        return numberOfSeasons;
+    public String getRuntime() {
+        return runtime;
     }
 
-    public void setNumberOfSeasons(String numberOfSeasons) {
-        this.numberOfSeasons = numberOfSeasons;
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
     }
 
-    public String getNumberOfEpisodes() {
-        return numberOfEpisodes;
+    public String getSpokenLanguages() {
+        return spokenLanguages;
     }
 
-    public void setNumberOfEpisodes(String numberOfEpisodes) {
-        this.numberOfEpisodes = numberOfEpisodes;
+    public void setSpokenLanguages(String spokenLanguages) {
+        this.spokenLanguages = spokenLanguages;
     }
 
     public String getVoteAverage() {
@@ -115,12 +115,12 @@ public class TvShowEntity implements Parcelable {
         this.backdropPath = backdropPath;
     }
 
-    public String getFirstAirDate() {
-        return firstAirDate;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setFirstAirDate(String firstAirDate) {
-        this.firstAirDate = firstAirDate;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public String getKeyTrailer() {
@@ -140,44 +140,44 @@ public class TvShowEntity implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
         dest.writeString(this.posterPath);
-        dest.writeString(this.name);
+        dest.writeString(this.title);
         dest.writeString(this.genreOne);
         dest.writeString(this.genreTwo);
-        dest.writeString(this.numberOfSeasons);
-        dest.writeString(this.numberOfEpisodes);
+        dest.writeString(this.runtime);
+        dest.writeString(this.spokenLanguages);
         dest.writeString(this.voteAverage);
         dest.writeString(this.overview);
         dest.writeString(this.backdropPath);
-        dest.writeString(this.firstAirDate);
+        dest.writeString(this.releaseDate);
         dest.writeString(this.keyTrailer);
     }
 
-    protected TvShowEntity(Parcel in) {
+    protected MovieEntity(Parcel in) {
         this.id = in.readString();
         this.posterPath = in.readString();
-        this.name = in.readString();
+        this.title = in.readString();
         this.genreOne = in.readString();
         this.genreTwo = in.readString();
-        this.numberOfSeasons = in.readString();
-        this.numberOfEpisodes = in.readString();
+        this.runtime = in.readString();
+        this.spokenLanguages = in.readString();
         this.voteAverage = in.readString();
         this.overview = in.readString();
         this.backdropPath = in.readString();
-        this.firstAirDate = in.readString();
+        this.releaseDate = in.readString();
         this.keyTrailer = in.readString();
     }
 
-    public static final Parcelable.Creator<TvShowEntity> CREATOR = new Parcelable.Creator<TvShowEntity>() {
+    public static final Parcelable.Creator<MovieEntity> CREATOR = new Parcelable.Creator<MovieEntity>() {
         @Override
-        public TvShowEntity createFromParcel(Parcel source) {
-            return new TvShowEntity(source);
+        public MovieEntity createFromParcel(Parcel source) {
+            return new MovieEntity(source);
         }
 
         @Override
-        public TvShowEntity[] newArray(int size) {
-            return new TvShowEntity[size];
+        public MovieEntity[] newArray(int size) {
+            return new MovieEntity[size];
         }
     };
+
+
 }
-
-

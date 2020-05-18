@@ -1,13 +1,17 @@
 package com.anggiat.jetpackmoviecatalogue.ui.home;
 
+import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.rule.ActivityTestRule;
 
 import com.anggiat.jetpackmoviecatalogue.R;
-import com.anggiat.jetpackmoviecatalogue.data.MovieEntity;
-import com.anggiat.jetpackmoviecatalogue.data.TvShowEntity;
+import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.MovieEntity;
+import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.TvShowEntity;
 import com.anggiat.jetpackmoviecatalogue.utils.DataDummy;
+import com.anggiat.jetpackmoviecatalogue.utils.EspressoIdlingResource;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -27,6 +31,16 @@ public class HomeActivityTest {
 
     @Rule
     public ActivityTestRule activityTestRule = new ActivityTestRule<>(HomeActivity.class);
+
+    @Before
+    public void setUp() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource());
+    }
+
+    @After
+    public void tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource());
+    }
 
     @Test
     public void loadMovies() {

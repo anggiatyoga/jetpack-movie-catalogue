@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.anggiat.jetpackmoviecatalogue.R;
-import com.anggiat.jetpackmoviecatalogue.data.TvShowEntity;
-
-import java.util.List;
+import com.anggiat.jetpackmoviecatalogue.utils.viewmodel.ViewModelFactory;
 
 public class TvShowFragment extends Fragment {
 
     private RecyclerView rvTvShow;
+    private ProgressBar progressBar;
 
     public TvShowFragment() {
     }
@@ -36,17 +36,22 @@ public class TvShowFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvTvShow = view.findViewById(R.id.rv_tv_show);
+        progressBar = view.findViewById(R.id.progress_bar);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            TvShowViewModel tvShowViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvShowViewModel.class);
-//            List<TvShowEntity> tvShow = tvShowViewModel.getTvShows();
-
+            ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
+            TvShowViewModel tvShowViewModel = new ViewModelProvider(this, factory).get(TvShowViewModel.class);
             TvShowAdapter tvShowAdapter = new TvShowAdapter();
-            tvShowAdapter.setTvShow(tvShowViewModel.getTvShows());
+            progressBar.setVisibility(View.VISIBLE);
+            tvShowViewModel.getTvShows().observe(this, tvShowEntities -> {
+                progressBar.setVisibility(View.GONE);
+                tvShowAdapter.setTvShow(tvShowEntities);
+                tvShowAdapter.notifyDataSetChanged();
+            });
 
             rvTvShow.setLayoutManager(new LinearLayoutManager(getContext()));
             rvTvShow.setHasFixedSize(true);

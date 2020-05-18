@@ -2,7 +2,6 @@
 <resources>
     <color name="colorPrimary">#FAFAFC</color>
     <color name="colorText">#39393F</color>
-    <color name="colorTextSecondary">#B3BBC6</color>
     <color name="colorTextTertiary">#E0DFE1</color>
 
     <color name="colorPrimaryDark">#FF2F3F51</color>

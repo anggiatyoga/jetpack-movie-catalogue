@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.anggiat.jetpackmoviecatalogue.R;
-import com.anggiat.jetpackmoviecatalogue.data.MovieEntity;
-
-import java.util.List;
+import com.anggiat.jetpackmoviecatalogue.utils.viewmodel.ViewModelFactory;
 
 public class MovieFragment extends Fragment {
 
     private RecyclerView rvMovie;
+    private ProgressBar progressBar;
 
     public MovieFragment() {
     }
@@ -36,17 +36,22 @@ public class MovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvMovie = view.findViewById(R.id.rv_movie);
+        progressBar = view.findViewById(R.id.progress_bar);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            MovieViewModel movieViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
-//            List<MovieEntity> movies = movieViewModel.getMovies();
-
+            ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
+            MovieViewModel movieViewModel = new ViewModelProvider(this, factory).get(MovieViewModel.class);
             MovieAdapter movieAdapter = new MovieAdapter();
-            movieAdapter.setMovies(movieViewModel.getMovies());
+            progressBar.setVisibility(View.VISIBLE);
+            movieViewModel.getMovies().observe(this, movieEntities -> {
+                progressBar.setVisibility(View.GONE);
+                movieAdapter.setMovies(movieEntities);
+                movieAdapter.notifyDataSetChanged();
+            });
 
             rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
             rvMovie.setHasFixedSize(true);

@@ -1,16 +1,22 @@
 package com.anggiat.jetpackmoviecatalogue.ui.tvshow;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.anggiat.jetpackmoviecatalogue.data.TvShowEntity;
-import com.anggiat.jetpackmoviecatalogue.utils.DataDummy;
+import com.anggiat.jetpackmoviecatalogue.data.source.MovieRepository;
+import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.TvShowEntity;
 
 import java.util.List;
 
 public class TvShowViewModel extends ViewModel {
+    private MovieRepository movieRepository;
 
-    List<TvShowEntity> getTvShows() {
-        return DataDummy.generateDataTvShows();
+    public TvShowViewModel(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
+
+    public LiveData<List<TvShowEntity>> getTvShows() {
+        return movieRepository.getAllTvShow();
     }
 
 }
