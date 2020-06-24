@@ -24,7 +24,8 @@ public class DataDummy {
                 "The near future, a time when both hope and hardships drive humanity to look to the stars and beyond. While a mysterious phenomenon menaces to destroy life on planet Earth, astronaut Roy McBride undertakes a mission across the immensity of space and its many perils to uncover the truth about a lost expedition that decades before boldly faced emptiness and silence in search of the unknown.",
                 "/5BwqwxMEjeFtdknRV792Svo0K1v.jpg",
                 "2019-09-17",
-                "P6AaSMfXHbA"
+                "P6AaSMfXHbA",
+                false
         ));
 
         movies.add(new MovieEntity(
@@ -39,7 +40,8 @@ public class DataDummy {
                 "After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine—'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought.",
                 "/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg",
                 "2020-03-05",
-                "F95Fk255I4M"
+                "F95Fk255I4M",
+                false
         ));
         movies.add(new MovieEntity(
                 "454626",
@@ -53,7 +55,8 @@ public class DataDummy {
                 "Based on the global blockbuster videogame franchise from Sega, Sonic the Hedgehog tells the story of the world’s speediest hedgehog as he embraces his new home on Earth. In this live-action adventure comedy, Sonic and his new best friend team up to defend the planet from the evil genius Dr. Robotnik and his plans for world domination.",
                 "/stmYfCUGd8Iy6kAMBr6AmWqx8Bq.jpg",
                 "2020-02-12",
-                "szby7ZHLnkA"
+                "szby7ZHLnkA",
+                false
         ));
 
         movies.add(new MovieEntity(
@@ -68,7 +71,8 @@ public class DataDummy {
                 "Harley Quinn joins forces with a singer, an assassin and a police detective to help a young girl who had a hit placed on her after she stole a rare diamond from a crime lord.",
                 "/uozb2VeD87YmhoUP1RrGWfzuCrr.jpg",
                 "2020-02-05",
-                "ptLZlrE8MrQ"
+                "ptLZlrE8MrQ",
+                false
         ));
 
         movies.add(new MovieEntity(
@@ -83,7 +87,8 @@ public class DataDummy {
                 "overviewSisterhood is tested, rivalries heat up and new bonds are formed when students go back to their performing arts school to compete for an all-expense paid summer scholarship program to a prestigious Conservatory of Fine Arts.",
                 "/6I6ZhQrX4L4KIxSzlgg8zc1BSLr.jpg",
                 "2020-03-10",
-                "DvEFm9m_4vY"
+                "DvEFm9m_4vY",
+                false
         ));
 
         movies.add(new MovieEntity(
@@ -98,7 +103,8 @@ public class DataDummy {
                 "The surviving Resistance faces the First Order once again as the journey of Rey, Finn and Poe Dameron continues. With the power and knowledge of generations behind them, the final battle begins.",
                 "/jOzrELAzFxtMx2I4uDGHOotdfsS.jpg",
                 "2019-12-18",
-                "adzYW5DZoWs"
+                "adzYW5DZoWs",
+                false
         ));
 
         movies.add(new MovieEntity(
@@ -113,7 +119,8 @@ public class DataDummy {
                 "Lightning McQueen, a hotshot rookie race car driven to succeed, discovers that life is about the journey, not the finish line, when he finds himself unexpectedly detoured in the sleepy Route 66 town of Radiator Springs. On route across the country to the big Piston Cup Championship in California to compete against two seasoned pros, McQueen gets to know the town's offbeat characters. ",
                 "/sd4xN5xi8tKRPrJOWwNiZEile7f.jpg",
                 "2006-06-08",
-                "SbXIj2T-_uk"
+                "SbXIj2T-_uk",
+                false
         ));
 
         movies.add(new MovieEntity(
@@ -128,7 +135,8 @@ public class DataDummy {
                 "After an earthquake destroys their underwater station, six researchers must navigate two miles along the dangerous, unknown depths of the ocean floor to make it to safety in a race against time.",
                 "/ww7eC3BqSbFsyE5H5qMde8WkxJ2.jpg",
                 "2020-01-08",
-                "jCFWEzIVILc"
+                "jCFWEzIVILc",
+                false
         ));
 
         movies.add(new MovieEntity(
@@ -143,7 +151,8 @@ public class DataDummy {
                 "Marcus and Mike are forced to confront new threats, career changes, and midlife crises as they join the newly created elite team AMMO of the Miami police department to take down the ruthless Armando Armas, the vicious leader of a Miami drug cartel.",
                 "/upUy2QhMZEmtypPW3PdieKLAHxh.jpg",
                 "2020-01-15",
-                "jKCj3XuPG8M"
+                "jKCj3XuPG8M",
+                false
         ));
 
         movies.add(new MovieEntity(
@@ -158,7 +167,8 @@ public class DataDummy {
                 "As the gang return to Jumanji to rescue one of their own, they discover that nothing is as they expect. The players will have to brave parts unknown and unexplored in order to escape the world’s most dangerous game.",
                 "/wNhRNSVQg4qF1oUI7nfFZgR7QAE.jpg",
                 "2019-12-04",
-                "rBxcF-r9Ibs"
+                "rBxcF-r9Ibs",
+                false
         ));
 
         return movies;
@@ -179,7 +189,8 @@ public class DataDummy {
                 "Charismatic highwayman Jan de Lichte leads the oppressed and downtrodden in a revolt against the corrupt aristocracy of 18th-century Belgium.",
                 "/gVVaukIifGJD78llZKgyT5FQbAe.jpg",
                 "2020-01-02",
-                "6C_dBiXsaos"
+                "6C_dBiXsaos",
+                false
         ));
 
         tvShows.add(new TvShowEntity(
@@ -194,7 +205,8 @@ public class DataDummy {
                 "Danny Rand resurfaces 15 years after being presumed dead. Now, with the power of the Iron Fist, he seeks to reclaim his past and fulfill his destiny.",
                 "/xHCfWGlxwbtMeeOnTvxUCZRGnkk.jpg",
                 "2017-03-17",
-                "QCSPda7xQ3s"
+                "QCSPda7xQ3s",
+                false
         ));
 
         tvShows.add(new TvShowEntity(
@@ -209,7 +221,8 @@ public class DataDummy {
                 "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \"meta-human\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
                 "/6ZdQTBy20HzWudZthAV7NkZWfIb.jpg",
                 "2014-10-07",
-                "Yj0l7iGKh8g"
+                "Yj0l7iGKh8g",
+                false
         ));
 
         tvShows.add(new TvShowEntity(
@@ -224,7 +237,8 @@ public class DataDummy {
                 "The alien girl Chai Xiaoqi tells the story of Fang Xiaoqi, the overbearing president of the alien girl who died from the Cape Town Planet, who was suffering from the rainy weather heterosexual amnesia. A high-energy hilarious and romantic cross-star love story. The female host Chai Xiaoqi is not only an alien, but also a true-handed witch. Once she inhales the hormones emitted by the males in the earth, she will fall into the flowery state and suffer from various diseases. The fun and ridiculously ridiculous romance will restore the singularity of the girl in the perfection of the girl. In order to survive on the human earth, Chai Xiaoqi will use his various super powers to solve one accident after another, like a roller coaster. The ups and downs will make the audience hooked. The male lord is cold and is an alternative overbearing president. When it rains, he will forget the opposite sex that appears around him. For this reason, he and the female host will launch various fighting and fighting laughter dramas. The experience of high sweetness and romance is expected to be Strongly slammed the girl's heart when it was broadcast.",
                 "/kCl7piWv3pypgYfyLFi7ZgFGlYV.jpg",
                 "2019-08-19",
-                "tj83yjNtaO4"
+                "tj83yjNtaO4",
+                false
         ));
 
         tvShows.add(new TvShowEntity(
@@ -239,7 +253,8 @@ public class DataDummy {
                 "In the criminal justice system, sexually-based offenses are considered especially heinous. In New York City, the dedicated detectives who investigate these vicious felonies are members of an elite squad known as the Special Victims Unit. These are their stories.",
                 "/cD9PxbrdWYgL7MUpD9eOYuiSe2P.jpg",
                 "1999-09-20",
-                "zClabIdSmhw"
+                "zClabIdSmhw",
+                false
         ));
 
         tvShows.add(new TvShowEntity(
@@ -254,7 +269,8 @@ public class DataDummy {
                 "A dark odyssey about the dawn of artificial consciousness and the evolution of sin. Set at the intersection of the near future and the reimagined past, it explores a world in which every human appetite, no matter how noble or depraved, can be indulged.",
                 "/yGNnjoIGOdQy3douq60tULY8teK.jpg",
                 "2016-10-02",
-                "JctIuZfSsa4"
+                "JctIuZfSsa4",
+                false
         ));
 
         tvShows.add(new TvShowEntity(
@@ -269,7 +285,8 @@ public class DataDummy {
                 "A family’s lives are irreparably disrupted when the 14-year-old son is accused of murdering a fellow classmate in this dramatic legal thriller.",
                 "/9wCsImxDW4MCVP47vVjny0Wa06s.jpg",
                 "2020-04-24",
-                "irNCbE_aOG4"
+                "irNCbE_aOG4",
+                false
         ));
 
         tvShows.add(new TvShowEntity(
@@ -284,7 +301,8 @@ public class DataDummy {
                 "To carry out the biggest heist in history, a mysterious man called The Professor recruits a band of eight robbers who have a single characteristic: none of them has anything to lose. Five months of seclusion - memorizing every step, every detail, every probability - culminate in eleven days locked up in the National Coinage and Stamp Factory of Spain, surrounded by police forces and with dozens of hostages in their power, to find out whether their suicide wager will lead to everything or nothing.",
                 "/xGexTKCJDkl12dTW4YCBDXWb1AD.jpg",
                 "2017-05-02",
-                "cQYvQIrM1FY"
+                "cQYvQIrM1FY",
+                false
         ));
 
         tvShows.add(new TvShowEntity(
@@ -299,7 +317,8 @@ public class DataDummy {
                 "Raymond Red Reddington, one of the FBI's most wanted fugitives, surrenders in person at FBI Headquarters in Washington, D.C. He claims that he and the FBI have the same interests: bringing down dangerous criminals and terrorists. In the last two decades, he's made a list of criminals and terrorists that matter the most but the FBI cannot find because it does not know they exist. Reddington calls this The Blacklist. Reddington will co-operate, but insists that he will speak only to Elizabeth Keen, a rookie FBI profiler.",
                 "/8YWQ1JrA4fihMwf9kYvGtd6mSe0.jpg",
                 "2013-09-23",
-                "1_soL84ZDvE"
+                "1_soL84ZDvE",
+                false
         ));
 
         tvShows.add(new TvShowEntity(
@@ -314,7 +333,8 @@ public class DataDummy {
                 "Set in Springfield, the average American town, the show focuses on the antics and everyday adventures of the Simpson family; Homer, Marge, Bart, Lisa and Maggie, as well as a virtual cast of thousands. Since the beginning, the series has been a pop culture icon, attracting hundreds of celebrities to guest star. The show has also made name for itself in its fearless satirical take on politics, media and American life in general.",
                 "/5zS9trn5k6T6Oew85ZIEKUfRo91.jpg",
                 "1989-12-17",
-                "DX1iplQQJTo"
+                "DX1iplQQJTo",
+                false
         ));
         return tvShows;
     }
@@ -631,5 +651,11 @@ public class DataDummy {
         ));
         return tvShows;
     }
+
+//    public static MovieEntity generateDummyMovieEntity(MovieEntity movie, boolean status) {
+//        MovieEntity movieEntity = new MovieEntity();
+//        movieEntity.setStatus(status);
+//        return movieEntity;
+//    }
 
 }

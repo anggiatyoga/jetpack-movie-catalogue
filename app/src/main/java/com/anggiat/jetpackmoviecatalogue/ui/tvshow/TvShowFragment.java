@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.anggiat.jetpackmoviecatalogue.R;
 import com.anggiat.jetpackmoviecatalogue.utils.viewmodel.ViewModelFactory;
@@ -45,13 +46,27 @@ public class TvShowFragment extends Fragment {
         if (getActivity() != null) {
             ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
             TvShowViewModel tvShowViewModel = new ViewModelProvider(this, factory).get(TvShowViewModel.class);
+            
             TvShowAdapter tvShowAdapter = new TvShowAdapter();
-            progressBar.setVisibility(View.VISIBLE);
-            tvShowViewModel.getTvShows().observe(this, tvShowEntities -> {
-                progressBar.setVisibility(View.GONE);
-                tvShowAdapter.setTvShow(tvShowEntities);
-                tvShowAdapter.notifyDataSetChanged();
+            tvShowViewModel.getTvShows().observe(this, tvShows -> {
+                if (tvShows != null) {
+                    switch (tvShows.status) {
+                        case LOADING:
+                            progressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case SUCCESS:
+                            progressBar.setVisibility(View.GONE);
+                            tvShowAdapter.submitList(tvShows.data);
+                            tvShowAdapter.notifyDataSetChanged();
+                            break;
+                        case ERROR:
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(getContext(), R.string.eror_message, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
             });
+            
 
             rvTvShow.setLayoutManager(new LinearLayoutManager(getContext()));
             rvTvShow.setHasFixedSize(true);

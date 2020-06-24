@@ -3,10 +3,11 @@ package com.anggiat.jetpackmoviecatalogue.ui.movies;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.paging.PagedList;
 
 import com.anggiat.jetpackmoviecatalogue.data.source.MovieRepository;
 import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.MovieEntity;
-import com.anggiat.jetpackmoviecatalogue.utils.DataDummy;
+import com.anggiat.jetpackmoviecatalogue.vo.Resource;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -15,7 +16,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -33,7 +33,10 @@ public class MovieViewModelTest {
     private MovieRepository movieRepository;
 
     @Mock
-    private Observer<List<MovieEntity>> observer;
+    private Observer<Resource<PagedList<MovieEntity>>> observer;
+
+    @Mock
+    private PagedList<MovieEntity> pagedList;
 
     @Before
     public void setUp() {
@@ -42,12 +45,13 @@ public class MovieViewModelTest {
 
     @Test
     public void getMovies() {
-        ArrayList<MovieEntity> dummyMovies = DataDummy.generateDataMovies();
-        MutableLiveData<List<MovieEntity>> movies = new MutableLiveData<>();
+        Resource<PagedList<MovieEntity>> dummyMovies = Resource.success(pagedList);
+        when(dummyMovies.data.size()).thenReturn(10);
+        MutableLiveData<Resource<PagedList<MovieEntity>>> movies = new MutableLiveData<>();
         movies.setValue(dummyMovies);
 
         when(movieRepository.getAllMovies()).thenReturn(movies);
-        List<MovieEntity> movieEntities = movieViewModel.getMovies().getValue();
+        List<MovieEntity> movieEntities = movieViewModel.getMovies().getValue().data;
         verify(movieRepository).getAllMovies();
         assertNotNull(movieEntities);
         assertEquals(10, movieEntities.size());

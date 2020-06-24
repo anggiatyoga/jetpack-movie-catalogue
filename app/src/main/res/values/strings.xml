@@ -28,4 +28,8 @@
     <string name="txt_episode_detail">12</string>
     <string name="image_backdrop">image_backdrop</string>
     <string name="image_view_gradient">image_view_gradient</string>
+
+    <string name="favorite">Favorite</string>
+    <string name="eror_message">Terjadi kesalahan</string>
+    <string name="tvshow">TvShow</string>
 </resources>

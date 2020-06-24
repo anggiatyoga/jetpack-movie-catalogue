@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.anggiat.jetpackmoviecatalogue.R;
 import com.anggiat.jetpackmoviecatalogue.utils.viewmodel.ViewModelFactory;
@@ -45,12 +46,25 @@ public class MovieFragment extends Fragment {
         if (getActivity() != null) {
             ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
             MovieViewModel movieViewModel = new ViewModelProvider(this, factory).get(MovieViewModel.class);
+
             MovieAdapter movieAdapter = new MovieAdapter();
-            progressBar.setVisibility(View.VISIBLE);
-            movieViewModel.getMovies().observe(this, movieEntities -> {
-                progressBar.setVisibility(View.GONE);
-                movieAdapter.setMovies(movieEntities);
-                movieAdapter.notifyDataSetChanged();
+            movieViewModel.getMovies().observe(this, movies -> {
+                if (movies != null) {
+                    switch (movies.status) {
+                        case LOADING:
+                            progressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case SUCCESS:
+                            progressBar.setVisibility(View.GONE);
+                            movieAdapter.submitList(movies.data);
+                            movieAdapter.notifyDataSetChanged();
+                            break;
+                        case ERROR:
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(getContext(), R.string.eror_message, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
             });
 
             rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));

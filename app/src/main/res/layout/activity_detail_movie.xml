@@ -39,12 +39,14 @@
             android:id="@+id/img_gradient_black"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:contentDescription="@string/image_view_gradient"
             android:src="@drawable/bg_gradient_black"
             app:layout_constraintBottom_toBottomOf="@+id/img_backdrop_detail"
             app:layout_constraintEnd_toEndOf="@+id/img_backdrop_detail"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/img_backdrop_detail"
-            android:contentDescription="@string/image_view_gradient" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_play_detail"
@@ -64,6 +66,7 @@
             android:layout_height="181dp"
             android:layout_marginStart="16dp"
             android:scaleType="centerCrop"
+            android:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/include_detail_description"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fab_play_detail"

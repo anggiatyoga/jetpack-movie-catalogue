@@ -3,24 +3,59 @@ package com.anggiat.jetpackmoviecatalogue.data.source.local.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "movie_entities")
 public class MovieEntity implements Parcelable {
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
     private String id;
+
+    @ColumnInfo(name = "poster_path")
     private String posterPath;
+
+    @ColumnInfo(name = "title")
     private String title;
+
+    @ColumnInfo(name = "genre_one")
     private String genreOne;
+
+    @ColumnInfo(name = "genre_two")
     private String genreTwo;
+
+    @ColumnInfo(name = "runtime")
     private String runtime;
+
+    @ColumnInfo(name = "spoken_language")
     private String spokenLanguages;
+
+    @ColumnInfo(name = "vote_average")
     private String voteAverage;
+
+    @ColumnInfo(name = "overview")
     private String overview;
+
+    @ColumnInfo(name = "backdrop_path")
     private String backdropPath;
+
+    @ColumnInfo(name = "release_date")
     private String releaseDate;
+
+    @ColumnInfo(name = "key_trailer")
     private String keyTrailer;
+
+    @ColumnInfo(name = "status")
+    private boolean status = false;
 
     public MovieEntity() {
     }
 
-    public MovieEntity(String id, String posterPath, String title, String genreOne, String genreTwo, String runtime, String spokenLanguages, String voteAverage, String overview, String backdropPath, String release_date, String keyTrailer) {
+    public MovieEntity(String id, String posterPath, String title, String genreOne, String genreTwo, String runtime, String spokenLanguages, String voteAverage, String overview, String backdropPath, String releaseDate, String keyTrailer, boolean status) {
         this.id = id;
         this.posterPath = posterPath;
         this.title = title;
@@ -31,8 +66,9 @@ public class MovieEntity implements Parcelable {
         this.voteAverage = voteAverage;
         this.overview = overview;
         this.backdropPath = backdropPath;
-        this.releaseDate = release_date;
+        this.releaseDate = releaseDate;
         this.keyTrailer = keyTrailer;
+        this.status = status;
     }
 
     public String getId() {
@@ -131,6 +167,15 @@ public class MovieEntity implements Parcelable {
         this.keyTrailer = keyTrailer;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -150,6 +195,7 @@ public class MovieEntity implements Parcelable {
         dest.writeString(this.backdropPath);
         dest.writeString(this.releaseDate);
         dest.writeString(this.keyTrailer);
+        dest.writeByte(this.status ? (byte) 1 : (byte) 0);
     }
 
     protected MovieEntity(Parcel in) {
@@ -165,9 +211,10 @@ public class MovieEntity implements Parcelable {
         this.backdropPath = in.readString();
         this.releaseDate = in.readString();
         this.keyTrailer = in.readString();
+        this.status = in.readByte() != 0;
     }
 
-    public static final Parcelable.Creator<MovieEntity> CREATOR = new Parcelable.Creator<MovieEntity>() {
+    public static final Creator<MovieEntity> CREATOR = new Creator<MovieEntity>() {
         @Override
         public MovieEntity createFromParcel(Parcel source) {
             return new MovieEntity(source);
@@ -178,6 +225,4 @@ public class MovieEntity implements Parcelable {
             return new MovieEntity[size];
         }
     };
-
-
 }

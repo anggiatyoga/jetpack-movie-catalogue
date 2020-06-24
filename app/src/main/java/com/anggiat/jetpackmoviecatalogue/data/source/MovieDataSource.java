@@ -1,20 +1,28 @@
 package com.anggiat.jetpackmoviecatalogue.data.source;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.PagedList;
 
 import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.MovieEntity;
 import com.anggiat.jetpackmoviecatalogue.data.source.local.entity.TvShowEntity;
-
-import java.util.List;
+import com.anggiat.jetpackmoviecatalogue.vo.Resource;
 
 public interface MovieDataSource {
 
-    LiveData<List<MovieEntity>> getAllMovies();
+    LiveData<Resource<PagedList<MovieEntity>>> getAllMovies();
 
-    LiveData<MovieEntity> getMoviesById(String moviesId);
+    LiveData<Resource<MovieEntity>> getMoviesById(String moviesId);
 
-    LiveData<List<TvShowEntity>> getAllTvShow();
+    LiveData<Resource<PagedList<TvShowEntity>>> getAllTvShow();
 
-    LiveData<TvShowEntity> getTvShowById(String tvShowId);
+    LiveData<Resource<TvShowEntity>> getTvShowById(String tvShowId);
+
+    LiveData<PagedList<MovieEntity>> getFavoriteMovie();
+
+    LiveData<PagedList<TvShowEntity>> getFavoriteTvShow();
+
+    void setFavoriteMovie(MovieEntity movie, boolean state);
+
+    void setFavoriteTvShow(TvShowEntity tvShow, boolean state);
 
 }

@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.anggiat.jetpackmoviecatalogue.data.source.MovieRepository;
 import com.anggiat.jetpackmoviecatalogue.di.Injection;
 import com.anggiat.jetpackmoviecatalogue.ui.detail.DetailViewModel;
+import com.anggiat.jetpackmoviecatalogue.ui.favorite.movie.FavoriteMovieViewModel;
+import com.anggiat.jetpackmoviecatalogue.ui.favorite.tvshow.FavoriteTvShowViewModel;
 import com.anggiat.jetpackmoviecatalogue.ui.movies.MovieViewModel;
 import com.anggiat.jetpackmoviecatalogue.ui.tvshow.TvShowViewModel;
 
@@ -43,6 +45,10 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory{
             return (T) new TvShowViewModel(mMovieRepository);
         } else if (modelClass.isAssignableFrom(DetailViewModel.class)) {
             return (T) new DetailViewModel(mMovieRepository);
+        } else if (modelClass.isAssignableFrom(FavoriteMovieViewModel.class)) {
+            return (T) new FavoriteMovieViewModel(mMovieRepository);
+        } else if (modelClass.isAssignableFrom(FavoriteTvShowViewModel.class)) {
+            return (T) new FavoriteTvShowViewModel(mMovieRepository);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: "+modelClass.getName());

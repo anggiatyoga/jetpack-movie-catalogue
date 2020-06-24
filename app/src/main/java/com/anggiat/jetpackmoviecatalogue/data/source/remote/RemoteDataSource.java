@@ -2,6 +2,9 @@ package com.anggiat.jetpackmoviecatalogue.data.source.remote;
 
 import android.os.Handler;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.anggiat.jetpackmoviecatalogue.data.source.remote.response.MovieResponse;
 import com.anggiat.jetpackmoviecatalogue.data.source.remote.response.TvShowResponse;
 import com.anggiat.jetpackmoviecatalogue.utils.EspressoIdlingResource;
@@ -13,8 +16,10 @@ public class RemoteDataSource {
 
     private static RemoteDataSource INSTANCE;
     private JsonHelper jsonHelper;
-    private Handler handler = new Handler();
     private final long SERVICE_LATENCY_IN_MILLIS = 2000;
+
+    private Handler handler = new Handler();
+
 
     public RemoteDataSource(JsonHelper jsonHelper) {
         this.jsonHelper = jsonHelper;
@@ -27,28 +32,24 @@ public class RemoteDataSource {
         return INSTANCE;
     }
 
-    public void getAllMovies(LoadMovieCallback callback) {
+    public LiveData<ApiResponse<List<MovieResponse>>> getAllMovies() {
         EspressoIdlingResource.increment();
+        MutableLiveData<ApiResponse<List<MovieResponse>>> movieResponse = new MutableLiveData<>();
         handler.postDelayed(()-> {
-            callback.onAllMovieReceived(jsonHelper.loadMovies());
+            movieResponse.setValue(ApiResponse.success(jsonHelper.loadMovies()));
             EspressoIdlingResource.decrement();
         }, SERVICE_LATENCY_IN_MILLIS);
+        return movieResponse;
     }
 
-    public void getAllTvShow(LoadTvShowCallback callback) {
+    public LiveData<ApiResponse<List<TvShowResponse>>> getAllTvShow() {
         EspressoIdlingResource.increment();
+        MutableLiveData<ApiResponse<List<TvShowResponse>>> tvShowResponse = new MutableLiveData<>();
         handler.postDelayed(()-> {
-            callback.onAllTvShowReceived(jsonHelper.loadTvShow());
+            tvShowResponse.setValue(ApiResponse.success(jsonHelper.loadTvShow()));
             EspressoIdlingResource.decrement();
         }, SERVICE_LATENCY_IN_MILLIS);
-    }
-
-    public interface LoadMovieCallback {
-        void onAllMovieReceived(List<MovieResponse> movieResponses);
-    }
-
-    public interface LoadTvShowCallback {
-        void onAllTvShowReceived(List<TvShowResponse> tvShowResponses);
+        return tvShowResponse;
     }
 
 }

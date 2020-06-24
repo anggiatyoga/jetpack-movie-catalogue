@@ -44,9 +44,6 @@ public class MovieResponse implements Parcelable {
         return posterPath;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
 
     public String getTitle() {
         return title;
@@ -60,74 +57,39 @@ public class MovieResponse implements Parcelable {
         return genreOne;
     }
 
-    public void setGenreOne(String genreOne) {
-        this.genreOne = genreOne;
-    }
 
     public String getGenreTwo() {
         return genreTwo;
-    }
-
-    public void setGenreTwo(String genreTwo) {
-        this.genreTwo = genreTwo;
     }
 
     public String getRuntime() {
         return runtime;
     }
 
-    public void setRuntime(String runtime) {
-        this.runtime = runtime;
-    }
-
     public String getSpokenLanguages() {
         return spokenLanguages;
     }
 
-    public void setSpokenLanguages(String spokenLanguages) {
-        this.spokenLanguages = spokenLanguages;
-    }
 
     public String getVoteAverage() {
         return voteAverage;
-    }
-
-    public void setVoteAverage(String voteAverage) {
-        this.voteAverage = voteAverage;
     }
 
     public String getOverview() {
         return overview;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
     public String getBackdropPath() {
         return backdropPath;
-    }
-
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
     }
 
     public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
     public String getKeyTrailer() {
         return keyTrailer;
     }
-
-    public void setKeyTrailer(String keyTrailer) {
-        this.keyTrailer = keyTrailer;
-    }
-
 
     @Override
     public int describeContents() {

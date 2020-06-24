@@ -3,24 +3,58 @@ package com.anggiat.jetpackmoviecatalogue.data.source.local.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "tvshow_entities")
 public class TvShowEntity implements Parcelable {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
     private String id;
+
+    @ColumnInfo(name = "poster_path")
     private String posterPath;
+
+    @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "genre_one")
     private String genreOne;
+
+    @ColumnInfo(name = "genre_two")
     private String genreTwo;
+
+    @ColumnInfo(name = "number_of_seasons")
     private String numberOfSeasons;
+
+    @ColumnInfo(name = "number_of_episodes")
     private String numberOfEpisodes;
+
+    @ColumnInfo(name = "vote_average")
     private String voteAverage;
+
+    @ColumnInfo(name = "overview")
     private String overview;
+
+    @ColumnInfo(name = "backdrop_path")
     private String backdropPath;
+
+    @ColumnInfo(name = "first_air_date")
     private String firstAirDate;
+
+    @ColumnInfo(name = "key_trailer")
     private String keyTrailer;
+
+    @ColumnInfo(name = "status")
+    private boolean status = false;
 
     public TvShowEntity() {
     }
 
-    public TvShowEntity(String id, String posterPath, String name, String genreOne, String genreTwo, String numberOfSeasons, String numberOfEpisodes, String voteAverage, String overview, String backdropPath, String firstAirDate, String keyTrailer) {
+    public TvShowEntity(String id, String posterPath, String name, String genreOne, String genreTwo, String numberOfSeasons, String numberOfEpisodes, String voteAverage, String overview, String backdropPath, String firstAirDate, String keyTrailer, boolean status) {
         this.id = id;
         this.posterPath = posterPath;
         this.name = name;
@@ -33,6 +67,7 @@ public class TvShowEntity implements Parcelable {
         this.backdropPath = backdropPath;
         this.firstAirDate = firstAirDate;
         this.keyTrailer = keyTrailer;
+        this.status = status;
     }
 
     public String getId() {
@@ -131,6 +166,15 @@ public class TvShowEntity implements Parcelable {
         this.keyTrailer = keyTrailer;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -150,6 +194,7 @@ public class TvShowEntity implements Parcelable {
         dest.writeString(this.backdropPath);
         dest.writeString(this.firstAirDate);
         dest.writeString(this.keyTrailer);
+        dest.writeByte(this.status ? (byte) 1 : (byte) 0);
     }
 
     protected TvShowEntity(Parcel in) {
@@ -165,9 +210,10 @@ public class TvShowEntity implements Parcelable {
         this.backdropPath = in.readString();
         this.firstAirDate = in.readString();
         this.keyTrailer = in.readString();
+        this.status = in.readByte() != 0;
     }
 
-    public static final Parcelable.Creator<TvShowEntity> CREATOR = new Parcelable.Creator<TvShowEntity>() {
+    public static final Creator<TvShowEntity> CREATOR = new Creator<TvShowEntity>() {
         @Override
         public TvShowEntity createFromParcel(Parcel source) {
             return new TvShowEntity(source);

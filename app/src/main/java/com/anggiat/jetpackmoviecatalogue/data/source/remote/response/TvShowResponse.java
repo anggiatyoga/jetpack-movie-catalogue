@@ -44,9 +44,6 @@ public class TvShowResponse implements Parcelable {
         return posterPath;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
 
     public String getName() {
         return name;
@@ -60,74 +57,39 @@ public class TvShowResponse implements Parcelable {
         return genreOne;
     }
 
-    public void setGenreOne(String genreOne) {
-        this.genreOne = genreOne;
-    }
-
     public String getGenreTwo() {
         return genreTwo;
     }
 
-    public void setGenreTwo(String genreTwo) {
-        this.genreTwo = genreTwo;
-    }
 
     public String getNumberOfSeasons() {
         return numberOfSeasons;
-    }
-
-    public void setNumberOfSeasons(String numberOfSeasons) {
-        this.numberOfSeasons = numberOfSeasons;
     }
 
     public String getNumberOfEpisodes() {
         return numberOfEpisodes;
     }
 
-    public void setNumberOfEpisodes(String numberOfEpisodes) {
-        this.numberOfEpisodes = numberOfEpisodes;
-    }
-
     public String getVoteAverage() {
         return voteAverage;
-    }
-
-    public void setVoteAverage(String voteAverage) {
-        this.voteAverage = voteAverage;
     }
 
     public String getOverview() {
         return overview;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
     public String getBackdropPath() {
         return backdropPath;
-    }
-
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
     }
 
     public String getFirstAirDate() {
         return firstAirDate;
     }
 
-    public void setFirstAirDate(String firstAirDate) {
-        this.firstAirDate = firstAirDate;
-    }
 
     public String getKeyTrailer() {
         return keyTrailer;
     }
-
-    public void setKeyTrailer(String keyTrailer) {
-        this.keyTrailer = keyTrailer;
-    }
-
 
     @Override
     public int describeContents() {

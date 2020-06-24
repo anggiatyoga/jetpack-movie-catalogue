@@ -1,5 +1,6 @@
 package com.anggiat.jetpackmoviecatalogue.ui.movies;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.anggiat.jetpackmoviecatalogue.BuildConfig;
@@ -17,18 +20,25 @@ import com.anggiat.jetpackmoviecatalogue.ui.detail.DetailActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
-    private List<MovieEntity> movieEntityList = new ArrayList<>();
+public class MovieAdapter extends PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder> {
     private static final String urlImage = BuildConfig.URL_IMAGE;
 
-    void setMovies(List<MovieEntity> movieEntityList) {
-        if (movieEntityList == null) return;
-        this.movieEntityList.clear();
-        this.movieEntityList.addAll(movieEntityList);
+    MovieAdapter() {
+        super(DIFF_CALLBACK);
     }
+
+    private static DiffUtil.ItemCallback<MovieEntity> DIFF_CALLBACK =  new DiffUtil.ItemCallback<MovieEntity>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull MovieEntity oldItem, @NonNull MovieEntity newItem) {
+            return oldItem.getId().equals(newItem.getId());
+        }
+
+        @SuppressLint("DiffUtilEquals")
+        @Override
+        public boolean areContentsTheSame(@NonNull MovieEntity oldItem, @NonNull MovieEntity newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
 
     @NonNull
     @Override
@@ -39,13 +49,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MovieAdapter.MovieViewHolder holder, int position) {
-        MovieEntity movie = movieEntityList.get(position);
-        holder.bind(movie);
-    }
-
-    @Override
-    public int getItemCount() {
-        return movieEntityList.size();
+        MovieEntity movie = getItem(position);
+        if (movie != null) {
+            holder.bind(movie);
+        }
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {

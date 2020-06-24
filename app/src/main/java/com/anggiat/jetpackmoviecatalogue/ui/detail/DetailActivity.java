@@ -1,16 +1,21 @@
 package com.anggiat.jetpackmoviecatalogue.ui.detail;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anggiat.jetpackmoviecatalogue.BuildConfig;
 import com.anggiat.jetpackmoviecatalogue.R;
@@ -43,6 +48,11 @@ public class DetailActivity extends AppCompatActivity {
     private TextView textLabelLanguage;
     private ProgressBar progressBar;
 
+    DetailViewModel viewModel;
+    MovieEntity movies;
+    TvShowEntity tvShow;
+    private Menu menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,31 +74,56 @@ public class DetailActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
 
         ViewModelFactory factory = ViewModelFactory.getInstance(this);
-        DetailViewModel viewModel = new ViewModelProvider(this, factory).get(DetailViewModel.class);
+         viewModel = new ViewModelProvider(this, factory).get(DetailViewModel.class);
 
-        MovieEntity movies = getIntent().getParcelableExtra(EXTRA_MOVIE);
-        TvShowEntity tvShow = getIntent().getParcelableExtra(EXTRA_TV_SHOW);
+         movies = getIntent().getParcelableExtra(EXTRA_MOVIE);
+         tvShow = getIntent().getParcelableExtra(EXTRA_TV_SHOW);
 
         progressBar.setVisibility(View.VISIBLE);
         if (movies != null && tvShow == null) {
-            viewModel.setSelectedMovie(movies.getId());
-            viewModel.getMovie().observe(this, movieEntity -> {
-                if (movieEntity != null) {
-                    progressBar.setVisibility(View.GONE);
-                    initViewMovies(movieEntity);
-                    playTrailer(movieEntity.getKeyTrailer());
+            viewModel.setMovieId(movies.getId());
+            viewModel.movieDetail.observe(this, movieDetail -> {
+                if (movieDetail != null) {
+                    switch (movieDetail.status) {
+                        case LOADING:
+                            progressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case SUCCESS:
+                            if(movieDetail.data != null) {
+                                progressBar.setVisibility(View.GONE);
+                                initViewMovies(movieDetail.data);
+                                playTrailer(movieDetail.data.getKeyTrailer());
+                            }
+                            break;
+                        case ERROR:
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(this, R.string.eror_message, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             });
         } else if (tvShow != null && movies == null) {
-            viewModel.setSelectedTvShow(tvShow.getId());
-            viewModel.getTvShow().observe(this, tvShowEntity -> {
-                if (tvShowEntity != null) {
-                    progressBar.setVisibility(View.GONE);
-                    initViewTvShow(tvShowEntity);
-                    playTrailer(tvShowEntity.getKeyTrailer());
+            viewModel.setTvShowId(tvShow.getId());
+            viewModel.tvShowDetail.observe(this, tvShowDetail -> {
+                if (tvShowDetail != null) {
+                    switch (tvShowDetail.status) {
+                        case LOADING:
+                            progressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case SUCCESS:
+                            if (tvShowDetail.data != null) {
+                                progressBar.setVisibility(View.GONE);
+                                initViewTvShow(tvShowDetail.data);
+                                playTrailer(tvShowDetail.data.getKeyTrailer());
+                            }
+                            break;
+                        case ERROR:
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(this, R.string.eror_message, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             });
-
         } else {
             System.out.println("Data not found");
         }
@@ -152,4 +187,75 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        this.menu = menu;
+        if (movies != null && tvShow == null) {
+            viewModel.setMovieId(movies.getId());
+            viewModel.movieDetail.observe(this, movieDetail -> {
+                if (movieDetail != null) {
+                    switch (movieDetail.status) {
+                        case LOADING:
+                            progressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case SUCCESS:
+                            if(movieDetail.data != null) {
+                                progressBar.setVisibility(View.GONE);
+                                boolean state = movieDetail.data.isStatus();
+                                setFavoriteState(state);
+                            }
+                            break;
+                        case ERROR:
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(this, R.string.eror_message, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            });
+        } else if (tvShow != null && movies == null) {
+            viewModel.setTvShowId(tvShow.getId());
+            viewModel.tvShowDetail.observe(this, tvShowDetail -> {
+                if (tvShowDetail != null) {
+                    switch (tvShowDetail.status) {
+                        case LOADING:
+                            progressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case SUCCESS:
+                            if (tvShowDetail.data != null) {
+                                progressBar.setVisibility(View.GONE);
+                                boolean status = tvShowDetail.data.isStatus();
+                                setFavoriteState(status);
+                            }
+                            break;
+                        case ERROR:
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(this, R.string.eror_message, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            });
+
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_favorite) {
+            viewModel.setFavorite();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setFavoriteState(boolean status) {
+        if (menu == null) return;
+        MenuItem menuItem = menu.findItem(R.id.action_favorite);
+        if (status) {
+            menuItem.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite));
+        } else {
+            menuItem.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border));
+        }
+    }
 }
